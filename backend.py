@@ -17,6 +17,10 @@ def extract_data(column_requires, data_url="tmp/final.xls"):
     columns = get_columns(df)
     if any([x not in columns for x in column_requires]):
         return {"error":"Columns must exist"}
+    elif len(column_requires) < 1 :
+        for column in columns:
+            res[column] = df[column].values.tolist()
+        return res
     else:
         for column in column_requires:
             res[column] = df[column].values.tolist()
